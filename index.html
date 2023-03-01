@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="https://kit.fontawesome.com/6431e093eb.css" crossorigin="anonymous"> -->
+    <script src="https://kit.fontawesome.com/6431e093eb.js" crossorigin="anonymous"></script>
+    <!-- <link href="/dist/output.css" rel="stylesheet"> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>To-do List</title>
+</head>
+<body class="bg-slate-700">
+            <header class="flex justify-between lg:px-20 py-5 px-5 lg:py-10 bg-[#F4EB12]">
+                <h1 class="lg:text-3xl lg:font-bold" id="TheGreeting">To-Do List</h1>
+                <h1 class="lg:text-3xl lg:font-bold" id="TheCurrentDate"></h1>
+            </header>
+            <div class="w-[100vw] lg:h-[70vh] h-[80vh] bg-[#DADBB8] lg:relative overflow-auto" id="showTask">
+
+                <!-- <div id="Editing_Area" class="absolute bottom-10 left-20 bg-red-100"> -->
+                </div>
+                    <input type="text" id="theText" placeholder="Text..." class="lg:w-[60vw] w-[70vw] lg:h-[7vh] h-[7vh] lg:pl-10 pl-5 lg:pr-20 font-semibold bg-gray-200 rounded-2xl absolute lg:bottom-10 bottom-3 lg:left-20 left-3">
+                        <i class="fa-solid fa-circle-check fa-3x absolute lg:bottom-10  bottom-3 lg:left-[66vw] left-[75vw] text-green-500 hover:text-green-600" id="btn"></i>
+
+
+                <!-- </div> -->
+
+
+            <script>
+
+            //    Showing date dynamically
+                let months = ['Jan','Feb','Mar','April','May','June','July','Aug','Sept','Oct','Nov','Dec'];
+                let date = new Date();
+                let thedate =date.getDate();
+                let theMonth = date.getMonth();
+                let theYear = date.getFullYear();
+
+                const TheCurrentDate = document.getElementById("TheCurrentDate");
+                TheCurrentDate.innerHTML=`${thedate}th ${months[theMonth]},${theYear} `;
+            //---------------------------------------------------------------------------------------------
+            
+            
+
+            let TheText = document.getElementById("theText");
+            let btn = document.getElementById("btn");
+            let TheTaskData = document.getElementById("showTask");
+            // console.log(TheText.value.length);
+
+            // if(TheText.value.length > 4){
+
+                TheText.addEventListener("keypress",(e)=>{
+                                console.log(e.key);
+                                if(e.key=="Enter")
+                                {
+            let thebox=`<div class="flex lg:mt-10 lg:p-5 lg:ml-20 w-[80vw] bg-yellow-300" id="thePoint">
+                        <h2 class="capitalize lg:w-[80vw]">${TheText.value}</h2>
+                        <button>
+                        <i class="fa-solid fa-trash text-red-600 ml-10" id="delete_btn"></i>
+                        </button>
+                        </div>`;
+                        TheText.value="";
+                            
+                     TheTaskData.insertAdjacentHTML("afterbegin",thebox);
+                     let delete_btn = document.getElementById("delete_btn");
+                     let delete_item = document.getElementById("thePoint");
+                     delete_btn.addEventListener("click",()=>{
+                         delete_item.remove();
+                                });
+                                }
+                              
+
+                            });
+                
+                btn.addEventListener("click",()=>{
+                    let thebox=`<div class="flex lg:mt-10 lg:p-5 lg:ml-20 w-[80vw] bg-yellow-300" id="thePoint">
+                        <h2 class="capitalize lg:w-[80vw]">${TheText.value}</h2>
+                        <button>
+                            <i class="fa-solid fa-trash sm:text-red-600 ml-10" id="delete_btn"></i>
+                            </button>
+                            </div>`;
+                            TheText.value="";
+                             
+         
+                     
+                     TheTaskData.insertAdjacentHTML("afterbegin",thebox);
+                     let delete_btn = document.getElementById("delete_btn");
+                     let delete_item = document.getElementById("thePoint");
+                     delete_btn.addEventListener("click",()=>{
+                         delete_item.remove();
+                        //  console.log("hi");
+                        })
+                 })
+
+            // }
+
+
+
+
+
+            </script>
+</body>
+</html>
